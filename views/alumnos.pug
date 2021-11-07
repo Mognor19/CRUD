@@ -1,0 +1,46 @@
+extends menu.pug 
+
+block title 
+    title Alumnos
+block container
+    .row.gx-5.mt-5
+        .col
+            .container.mt-3(style={width:'400px'})
+                form(action="/carreras" method="post")
+                    .form-group
+                        label(for="numeroIdentidad") Numero de Identidad
+                        input#numeroIdentidad.form-control(type="text" name="numeroIdentidad")
+
+                    .form-group
+                        label(for="nombres") Nombres
+                        input#nombres.form-control(type="text" name="nombres")
+
+                    .form-group
+                        label(for="apellidos") Apellidos
+                        input#apellidos.form-control(type="text" name="apellidos")
+                        
+                    .form-group.mt-3
+                        label(for="mensualidad") Mensualidad
+                        input#mensualidad.form-control(type="number" step="any" name="mensualidad")
+
+                    .form-group.mt-3
+                        label(for="numeroClases") Numero de clases
+                        input#numeroClases.form-control(type="number" name="numeroClases")
+                    
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                        button.w-100.btn.btn-lg.btn-primary(type='submit') Agregar 
+                    
+                    if carrera !== undefined && carrera.length !== 0
+                        a.nav-link.mt-3(href='/deleteCarrera') Borrar carrera?
+        .col
+            if carrera !== undefined && carrera.length !== 0
+                each a in alumno
+                    tr
+                        td #{a.numeroIdentidad}
+                        td #{a.nombres}
+                        td #{a.apellidos}
+                        td #{a.telefono}
+                        td #{a.correo}
+
+                

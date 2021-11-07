@@ -1,0 +1,43 @@
+extends menu.pug 
+
+block title 
+    title Carreras
+block container
+    .row.gx-5.mt-5
+        .col
+            .container.mt-3(style={width:'400px'})
+                form(action="/carreras" method="post")
+                    .form-group
+                        label(for="carrera") Carrera
+                        input#carrera.form-control(type="text" name="carrera")
+
+                    .form-group.mt-3
+                        label(for="mensualidad") Mensualidad
+                        input#mensualidad.form-control(type="number" step="any" name="mensualidad")
+
+                    .form-group.mt-3
+                        label(for="numeroClases") Numero de clases
+                        input#numeroClases.form-control(type="number" name="numeroClases")
+                    
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                        button.w-100.btn.btn-lg.btn-primary(type='submit') Agregar 
+                    
+                    if carrera !== undefined && carrera.length !== 0
+                        a.nav-link.mt-3(href='/deleteCarrera') Borrar carrera?
+        .col
+            if carrera !== undefined && carrera.length !== 0
+                table.table.mt-3
+                    tr.table-dark
+                        th ID
+                        th Carrera
+                        th Mensualidad
+                        th Numero de clases
+                    each c in carrera
+                        tr
+                            td #{c.idCarrera}
+                            td #{c.nombreCarrera}
+                            td #{c.mensualidad}
+                            td #{c.numeroClases}
+            else
+                h1 No hay datos

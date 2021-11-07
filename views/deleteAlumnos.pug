@@ -1,0 +1,32 @@
+extends menu.pug 
+
+block title 
+    title Borrar Alumnos
+block container
+    .row.gx-5.mt-5
+        .col(style={width:'400px'})
+            form(action="/deleteCarrera" method="post")
+                .form-group.mt-3
+                    label.fw-bold(for="idCarrera") Busqueda
+                    input.form-control.agregar(type='number' placeholder='ID de la carrera' name="idCarrera" required)
+                .form-check.mt-3
+                        button.agregar.btn.btn-lg.btn-primary(type="submit") Eliminar
+
+                        a.nav-link.mt-3(href='/carreras') Agregar una carrera?
+        
+        .col
+            if carrera !== undefined && carrera.length !== 0
+                table.table.mt-3
+                    tr.table-dark
+                        th ID
+                        th Carrera
+                        th Mensualidad
+                        th Numero de clases
+                    each c in carrera
+                        tr
+                            td #{c.idCarrera}
+                            td #{c.nombreCarrera}
+                            td #{c.mensualidad}
+                            td #{c.numeroClases}
+            else
+                h1 No hay datos
