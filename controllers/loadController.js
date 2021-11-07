@@ -63,3 +63,47 @@ export const deleteCarreraGet = (req, res, next) => {
         next()
     })
 }
+
+export const createAlumnos = (req,res,next) =>{
+    const {numeroIdentidad, nombres, apellidos, telefono, correo, carreraId} = req.body
+
+    const data = {
+        nombres:nombres,
+        apellidos:apellidos,
+        telefono:telefono,
+        carreraFK:carreraId,
+        numeroIdentidad:numeroIdentidad,
+        correo:correo,
+    }
+
+    con.query('INSERT INTO alumno SET ?',data, (err,result)=>{
+        if(err){
+            console.log('Ocurrio un error al seleccionar los datos.');
+            return
+        }
+        res.render('alumnos')
+    })
+}
+
+export const deleteAlumnos = (req, res) => {
+    const {idAlumno} = req.body
+
+    con.query('DELETE FROM alumno WHERE numeroIdentidad = ?',idAlumno, (err, result) => {
+        if (err) {
+            console.log(`Ocurrio un error al eliminar ${err}`)
+            return
+        }
+        res.redirect('/')
+    })
+}
+
+export const deleteAlumnosGet = (req, res, next) => {
+    con.query('SELECT * FROM alumno', (err,result)=>{
+        if(err){
+            console.log('Ocurrio un error al seleccionar los datos.');
+            return
+        }
+        req.alumnos = result
+        next()
+    })
+}

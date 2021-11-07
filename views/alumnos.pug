@@ -6,7 +6,7 @@ block container
     .row.gx-5.mt-5
         .col
             .container.mt-3(style={width:'400px'})
-                form(action="/carreras" method="post")
+                form(action="/" method="post")
                     .form-group
                         label(for="numeroIdentidad") Numero de Identidad
                         input#numeroIdentidad.form-control(type="text" name="numeroIdentidad")
@@ -20,27 +20,42 @@ block container
                         input#apellidos.form-control(type="text" name="apellidos")
                         
                     .form-group.mt-3
-                        label(for="mensualidad") Mensualidad
-                        input#mensualidad.form-control(type="number" step="any" name="mensualidad")
+                        label(for="telefono") Telefono
+                        input#telefono.form-control(type="number" name="telefono")
 
                     .form-group.mt-3
-                        label(for="numeroClases") Numero de clases
-                        input#numeroClases.form-control(type="number" name="numeroClases")
-                    
+                        label(for="correo") Correo
+                        input#correo.form-control(type="Text" name="correo")
+
+                    .form-group.mt-3
+                        label(for="carreraId") ID# Carrera
+                        input#carreraId.form-control(type="Text" name="carreraId")
+
                     .form-group.mt-3
                         .d-grid.gap-2
                         button.w-100.btn.btn-lg.btn-primary(type='submit') Agregar 
                     
-                    if carrera !== undefined && carrera.length !== 0
-                        a.nav-link.mt-3(href='/deleteCarrera') Borrar carrera?
+                    if alumno !== undefined && alumno.length !== 0
+                        a.nav-link.mt-3(href='/deleteAlumnos') Eliminar a un alumno?
         .col
-            if carrera !== undefined && carrera.length !== 0
-                each a in alumno
-                    tr
-                        td #{a.numeroIdentidad}
-                        td #{a.nombres}
-                        td #{a.apellidos}
-                        td #{a.telefono}
-                        td #{a.correo}
+            if alumno !== undefined && alumno.length !== 0
+                table.table.mt-3
+                    tr.table-dark
+                        th Numero de Identidad
+                        th Nombres
+                        th Apellidos
+                        th Telefono
+                        th Correo
+                        th ID# Carrera
+                    each a in alumno
+                        tr
+                            td #{a.numeroIdentidad}
+                            td #{a.nombres}
+                            td #{a.apellidos}
+                            td #{a.telefono}
+                            td #{a.correo}
+                            td #{a.carreraFK}
+            else 
+                h1 No hay datos
 
                 
